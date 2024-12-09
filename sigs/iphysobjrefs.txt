@@ -1,0 +1,148 @@
+PhysForceClearVelocity(IPhysicsObject*)
+PhysDisableEntityCollisions(IPhysicsObject*, IPhysicsObject*)
+PhysDisableObjectCollisions(IPhysicsObject*, IPhysicsObject*)
+PhysEnableEntityCollisions(IPhysicsObject*, IPhysicsObject*)
+PhysEnableObjectCollisions(IPhysicsObject*, IPhysicsObject*)
+PhysEnableFloating(IPhysicsObject*, bool)
+PhysShouldCollide(IPhysicsObject*, IPhysicsObject*)
+Push_PhysObj(IPhysicsObject const*)
+PhysBreakSound(CBaseEntity*, IPhysicsObject*, Vector)
+DebugDrawContactPoints(IPhysicsObject*)
+CanResolvePenetrationWithNPC(CBaseEntity*, IPhysicsObject*)
+GMod::Util::IsPhysicsObjectValid(IPhysicsObject*)
+
+CBaseEntity::AttachObjectToMotionController(IPhysicsObject*)
+CBaseEntity::DetachObjectFromMotionController(IPhysicsObject*)
+CBaseEntity::GMOD_VPhysicsTest(IPhysicsObject*)
+CBaseEntity::SetPhysObject(int, IPhysicsObject*)
+CBaseEntity::SetScaledPhysics(IPhysicsObject*)
+CBaseEntity::VPhysicsFriction(IPhysicsObject*, float, int, int)
+CBaseEntity::VPhysicsGetObjectList(IPhysicsObject**, int)
+CBaseEntity::VPhysicsSetObject(IPhysicsObject*)
+CBaseEntity::VPhysicsShadowUpdate(IPhysicsObject*)
+CBaseEntity::VPhysicsSwapObject(IPhysicsObject*)
+CBaseEntity::VPhysicsUpdate(IPhysicsObject*)
+CBaseEntity::VPhysicsUpdatePusher(IPhysicsObject*)
+CBasePlayer::GetHeldObjectMass(IPhysicsObject*)
+CBasePlayer::IsRideablePhysics(IPhysicsObject*)
+CBasePlayer::VPhysicsShadowUpdate(IPhysicsObject*)
+CBasePlayer::VPhysicsUpdate(IPhysicsObject*)
+
+CCollisionEvent::AddDamageEvent(CBaseEntity*, CTakeDamageInfo const&, IPhysicsObject*, bool, Vector const&, Vector const&)
+CCollisionEvent::AddDamageEvent(CBaseEntity*, CTakeDamageInfo const&, IPhysicsObject*, bool, Vector const&, Vector const&) [clone .part.190]
+CCollisionEvent::AddDamageInflictor(IPhysicsObject*, float, Vector const&, Vector const&, bool)
+CCollisionEvent::EndTouch(IPhysicsObject*, IPhysicsObject*, IPhysicsCollisionData*)
+CCollisionEvent::FindDamageInflictor(IPhysicsObject*)
+CCollisionEvent::FluidEndTouch(IPhysicsObject*, IPhysicsFluidController*)
+CCollisionEvent::FluidStartTouch(IPhysicsObject*, IPhysicsFluidController*)
+CCollisionEvent::Friction(IPhysicsObject*, float, int, int, IPhysicsCollisionData*)
+CCollisionEvent::GetInflictorVelocity(IPhysicsObject*, Vector&, Vector&)
+CCollisionEvent::ObjectEnterTrigger(IPhysicsObject*, IPhysicsObject*)
+CCollisionEvent::ObjectLeaveTrigger(IPhysicsObject*, IPhysicsObject*)
+CCollisionEvent::ObjectSleep(IPhysicsObject*)
+CCollisionEvent::ObjectWake(IPhysicsObject*)
+CCollisionEvent::RestoreDamageInflictorState(IPhysicsObject*)
+CCollisionEvent::ShouldCollide(IPhysicsObject*, IPhysicsObject*, void*, void*)
+CCollisionEvent::ShouldFreezeContacts(IPhysicsObject**, int)
+CCollisionEvent::ShouldFreezeObject(IPhysicsObject*)
+CCollisionEvent::ShouldSolvePenetration(IPhysicsObject*, IPhysicsObject*, void*, void*, float)
+CCollisionEvent::StartTouch(IPhysicsObject*, IPhysicsObject*, IPhysicsCollisionData*)
+
+CConstantForceController::Simulate(IPhysicsMotionController*, IPhysicsObject*, float, Vector&, Vector&)
+
+CDefOps<IPhysicsObject*>::LessFunc(IPhysicsObject* const&, IPhysicsObject* const&)
+
+CEmptyCollisionListener::EndTouch(IPhysicsObject*, IPhysicsObject*, IPhysicsCollisionData*)
+CEmptyCollisionListener::FluidEndTouch(IPhysicsObject*, IPhysicsFluidController*)
+CEmptyCollisionListener::FluidStartTouch(IPhysicsObject*, IPhysicsFluidController*)
+CEmptyCollisionListener::Friction(IPhysicsObject*, float, int, int, IPhysicsCollisionData*)
+CEmptyCollisionListener::ObjectEnterTrigger(IPhysicsObject*, IPhysicsObject*)
+CEmptyCollisionListener::ObjectLeaveTrigger(IPhysicsObject*, IPhysicsObject*)
+CEmptyCollisionListener::StartTouch(IPhysicsObject*, IPhysicsObject*, IPhysicsCollisionData*)
+
+CPhysConstraint::ClearStaticFlag(IPhysicsObject*)
+CPhysConstraint::SetPhysObject(int, IPhysicsObject*)
+
+CPhysForce::SetPhysObject(int, IPhysicsObject*)
+
+CLogicCollisionPair::SetPhysObject(int, IPhysicsObject*)
+
+CHL2_Player::GetHeldObjectMass(IPhysicsObject*)
+
+CPhysicsConstraintGroup::SolvePenetration(IPhysicsObject*, IPhysicsObject*)
+
+CPhysicsEnvironment::CreateBallsocketConstraint(IPhysicsObject*, IPhysicsObject*, IPhysicsConstraintGroup*, constraint_ballsocketparams_t const&)
+CPhysicsEnvironment::CreateFixedConstraint(IPhysicsObject*, IPhysicsObject*, IPhysicsConstraintGroup*, constraint_fixedparams_t const&)
+CPhysicsEnvironment::CreateFluidController(IPhysicsObject*, fluidparams_t*)
+CPhysicsEnvironment::CreateHingeConstraint(IPhysicsObject*, IPhysicsObject*, IPhysicsConstraintGroup*, constraint_hingeparams_t const&)
+CPhysicsEnvironment::CreateLengthConstraint(IPhysicsObject*, IPhysicsObject*, IPhysicsConstraintGroup*, constraint_lengthparams_t const&)
+CPhysicsEnvironment::CreateLimitedHingeConstraint(IPhysicsObject*, IPhysicsObject*, IPhysicsConstraintGroup*, constraint_limitedhingeparams_t const&)
+CPhysicsEnvironment::CreatePlayerController(IPhysicsObject*)
+CPhysicsEnvironment::CreatePulleyConstraint(IPhysicsObject*, IPhysicsObject*, IPhysicsConstraintGroup*, constraint_pulleyparams_t const&)
+CPhysicsEnvironment::CreateRagdollConstraint(IPhysicsObject*, IPhysicsObject*, IPhysicsConstraintGroup*, constraint_ragdollparams_t const&)
+CPhysicsEnvironment::CreateShadowController(IPhysicsObject*, bool, bool)
+CPhysicsEnvironment::CreateSlidingConstraint(IPhysicsObject*, IPhysicsObject*, IPhysicsConstraintGroup*, constraint_slidingparams_t const&)
+CPhysicsEnvironment::CreateSpring(IPhysicsObject*, IPhysicsObject*, springparams_t*)
+CPhysicsEnvironment::CreateVehicleController(IPhysicsObject*, vehicleparams_t const&, unsigned int, IPhysicsGameTrace*)
+CPhysicsEnvironment::DestroyObject(IPhysicsObject*)
+CPhysicsEnvironment::FindPlayerController(IPhysicsObject*)
+CPhysicsEnvironment::GetActiveObjects(IPhysicsObject**) const
+CPhysicsEnvironment::GetObjectSerializeSize(IPhysicsObject*) const
+CPhysicsEnvironment::SerializeObjectToBuffer(IPhysicsObject*, unsigned char*, unsigned int)
+CPhysicsEnvironment::SetObjectEventHandler(IPhysicsObjectEvent*)
+CPhysicsEnvironment::TransferObject(IPhysicsObject*, IPhysicsEnvironment*)
+
+CPhysicsInterface::DestroyObjectPairHash(IPhysicsObjectPairHash*)
+
+CPhysicsNPCSolver::IsContactOnNPCHead(IPhysicsFrictionSnapshot*, IPhysicsObject*, CAI_BaseNPC*)
+
+CPhysicsObject::GetContactPoint(Vector*, IPhysicsObject**) const
+
+CPhysicsProp::VPhysicsUpdate(IPhysicsObject*)
+CPhysicsPropMultiplayer::VPhysicsUpdate(IPhysicsObject*)
+
+CPhysicsPlayerCallback::ShouldMoveTo(IPhysicsObject*, Vector const&)
+
+CPhysicsShake::Simulate(IPhysicsMotionController*, IPhysicsObject*, float, Vector&, Vector&)
+
+CPhysicsSpring::GetSpringObjectConnections(string_t, string_t, IPhysicsObject**, IPhysicsObject**)
+CPhysicsSpring::SetPhysObject(int, IPhysicsObject*)
+
+CPhysMotor::SetPhysObject(int, IPhysicsObject*)
+
+CPhysSlideConstraint::NotifyVPhysicsStateChanged(IPhysicsObject*, CBaseEntity*, bool)
+
+CPhysThruster::SetupForces(IPhysicsObject*, Vector&, Vector&)
+CPhysTorque::SetupForces(IPhysicsObject*, Vector&, Vector&)
+
+GetConstraintAttachments(CBaseEntity*, CBaseEntity**, IPhysicsObject**)
+GetSpringAttachments(CBaseEntity*, CBaseEntity**, IPhysicsObject**)
+GetRagdollConstraintGroup(IPhysicsObject*)
+
+GMod::Util::IsPhysicsObjectValid(IPhysicsObject*)
+
+FindMaxContact(IPhysicsObject*, float, IPhysicsObject**, Vector*, Vector*)
+DrawPhysicsBounds(IPhysicsObject*, int, int, int, int) [clone .constprop.73]
+
+IPhysicsCollisionEvent::ObjectEnterTrigger(IPhysicsObject*, IPhysicsObject*)
+IPhysicsCollisionEvent::ObjectEnterTrigger(IPhysicsObject*, IPhysicsObject*)
+
+IPhysicsCollisionEvent::ObjectLeaveTrigger(IPhysicsObject*, IPhysicsObject*)
+IPhysicsCollisionEvent::ObjectLeaveTrigger(IPhysicsObject*, IPhysicsObject*)
+
+IPhysicsObject::~IPhysicsObject()
+IPhysicsObject::~IPhysicsObject()
+IPhysicsObject::~IPhysicsObject()
+
+IPhysicsObject* ILuaInterface::UserGet<IPhysicsObject>(int)
+
+PhysTeleportConstrainedEntity(CBaseEntity*, IPhysicsObject*, IPhysicsObject*, Vector const&, QAngle const&, bool)
+
+CRagdollPropAttached::InitRagdollAttached(IPhysicsObject*, Vector const&, int, matrix3x4_t*, matrix3x4_t*, float, int, CBaseAnimating*, int, Vector const&, int, Vector const&)
+CRagdollPropAttached::VPhysicsUpdate(IPhysicsObject*)
+
+CRagdollProp::UpdateNetworkDataFromVPhysics(IPhysicsObject*, int)
+CRagdollProp::UpdateNetworkDataFromVPhysics(IPhysicsObject*, int) [clone .part.34]
+CRagdollProp::VPhysicsGetObjectList(IPhysicsObject**, int)
+CRagdollProp::VPhysicsUpdate(IPhysicsObject*)
+

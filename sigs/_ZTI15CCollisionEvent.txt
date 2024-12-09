@@ -1,0 +1,75 @@
+.rodata:011F3244                 dd offset _ZTI15CCollisionEvent 
+; `typeinfo for'CCollisionEvent
+.rodata:011F3248 off_11F3248     dd offset _ZN15CCollisionEvent12PreCollisionEP17vcollisionevent_t
+.rodata:011F3248                                         ; DATA XREF: CCollisionEvent::CCollisionEvent(void)+6↑o
+.rodata:011F3248                                         ; CCollisionEvent::~CCollisionEvent()+11↑o
+.rodata:011F3248                                         ; CCollisionEvent::PreCollision(vcollisionevent_t *)
+
+
+.rodata:011F324C                 dd offset _ZN15CCollisionEvent13PostCollisionEP17vcollisionevent_t 
+; CCollisionEvent::PostCollision(vcollisionevent_t *)
+
+
+.rodata:011F3250                 dd offset _ZN15CCollisionEvent8FrictionEP14IPhysicsObjectfiiP21IPhysicsCollisionData 
+; CCollisionEvent::Friction(IPhysicsObject *,float,int,int,IPhysicsCollisionData *)
+
+
+.rodata:011F3254                 dd offset _ZN15CCollisionEvent10StartTouchEP14IPhysicsObjectS1_P21IPhysicsCollisionData 
+; CCollisionEvent::StartTouch(IPhysicsObject *,IPhysicsObject *,IPhysicsCollisionData *)
+
+
+.rodata:011F3258                 dd offset _ZN15CCollisionEvent8EndTouchEP14IPhysicsObjectS1_P21IPhysicsCollisionData 
+; CCollisionEvent::EndTouch(IPhysicsObject *,IPhysicsObject *,IPhysicsCollisionData *)
+
+
+.rodata:011F325C                 dd offset _ZN15CCollisionEvent15FluidStartTouchEP14IPhysicsObjectP23IPhysicsFluidController 
+; CCollisionEvent::FluidStartTouch(IPhysicsObject *,IPhysicsFluidController *)
+
+
+.rodata:011F3260                 dd offset _ZN15CCollisionEvent13FluidEndTouchEP14IPhysicsObjectP23IPhysicsFluidController 
+; CCollisionEvent::FluidEndTouch(IPhysicsObject *,IPhysicsFluidController *)
+
+
+.rodata:011F3264                 dd offset _ZN15CCollisionEvent19PostSimulationFrameEv 
+; CCollisionEvent::PostSimulationFrame(void)
+
+
+.rodata:011F3268                 dd offset _ZN15CCollisionEvent18ObjectEnterTriggerEP14IPhysicsObjectS1_ 
+; CCollisionEvent::ObjectEnterTrigger(IPhysicsObject *,IPhysicsObject *)
+
+
+.rodata:011F326C                 dd offset _ZN15CCollisionEvent18ObjectLeaveTriggerEP14IPhysicsObjectS1_ 
+; CCollisionEvent::ObjectLeaveTrigger(IPhysicsObject *,IPhysicsObject *)
+
+
+.rodata:011F3270                 dd offset _ZN15CCollisionEvent14AddDamageEventEP11CBaseEntityRK15CTakeDamageInfoP14IPhysicsObjectbRK6VectorS9_ 
+; CCollisionEvent::AddDamageEvent(CBaseEntity *,CTakeDamageInfo const&,IPhysicsObject *,bool,Vector const&,Vector const&)
+
+
+.rodata:011F3274                 dd offset _ZN15CCollisionEvent13ShouldCollideEP14IPhysicsObjectS1_PvS2_ 
+; CCollisionEvent::ShouldCollide(IPhysicsObject *,IPhysicsObject *,void *,void *)
+
+
+.rodata:011F3278                 dd offset _ZN15CCollisionEvent22ShouldSolvePenetrationEP14IPhysicsObjectS1_PvS2_f 
+; CCollisionEvent::ShouldSolvePenetration(IPhysicsObject *,IPhysicsObject *,void *,void *,float)
+
+
+.rodata:011F327C                 dd offset _ZN15CCollisionEvent18ShouldFreezeObjectEP14IPhysicsObject 
+; CCollisionEvent::ShouldFreezeObject(IPhysicsObject *)
+
+
+.rodata:011F3280                 dd offset _ZN15CCollisionEvent33AdditionalCollisionChecksThisTickEi 
+; CCollisionEvent::AdditionalCollisionChecksThisTick(int)
+
+
+.rodata:011F3284                 dd offset _ZN15CCollisionEvent20ShouldFreezeContactsEPP14IPhysicsObjecti 
+; CCollisionEvent::ShouldFreezeContacts(IPhysicsObject **,int)
+
+
+.rodata:011F3288                 dd offset _ZN15CCollisionEvent10ObjectWakeEP14IPhysicsObject 
+; CCollisionEvent::ObjectWake(IPhysicsObject *)
+
+
+.rodata:011F328C                 dd offset _ZN15CCollisionEvent11ObjectSleepEP14IPhysicsObject 
+; CCollisionEvent::ObjectSleep(IPhysicsObject *)
+

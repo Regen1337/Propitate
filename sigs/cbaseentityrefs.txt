@@ -1,0 +1,538 @@
+CGarrysMod::ShouldCollide(CBaseEntity*, CBaseEntity*)
+
+CServerGameEnts::BaseEntityToEdict(CBaseEntity*)
+
+CServerNetworkProperty::Init(CBaseEntity*)
+
+CServerRagdollTrigger::EndTouch(CBaseEntity*)
+CServerRagdollTrigger::StartTouch(CBaseEntity*)
+
+CGlobalEntityList::NextEnt(CBaseEntity*)
+
+CGrabController::ComputeMaxSpeed(CBaseEntity*, IPhysicsObject*)
+
+CGMOD_Player::PickupObject(CBaseEntity*, bool)
+
+CGlobalEntityList::ReportEntityFlagsChanged(CBaseEntity*, unsigned int, unsigned int)
+
+CHL2_Player::PickupObject(CBaseEntity*, bool)
+CHL2_Player::SetupVisibility(CBaseEntity*, unsigned char*, int)
+CHL2_Player::IsHoldingEntity(CBaseEntity*)
+
+CPhysConstraint::NotifySystemEvent(CBaseEntity*, notify_system_event_t, notify_system_event_params_t const&)
+CPhysGunControllerPoint::AttachEntity(CBasePlayer*, CBaseEntity*, IPhysicsObject*, Vector const&)
+
+CPhysExplosion::Explode(CBaseEntity*, CBaseEntity*)
+CPhysExplosion::FindEntity(CBaseEntity*, CBaseEntity*, CBaseEntity*)
+
+CPhysicsEntitySolver::Create(CBaseEntity*, CBaseEntity*, float)
+CPhysicsEntitySolver::Init(CBaseEntity*, CBaseEntity*, float)
+
+CPhysicsProp::Use(CBaseEntity*, CBaseEntity*, USE_TYPE, float)
+
+CServerTools::AddMultiDamage(CTakeDamageInfo const&, CBaseEntity*)
+CServerTools::DispatchSpawn(CBaseEntity*)
+CServerTools::GetKeyValue(CBaseEntity*, char const*, char*, int)
+CServerTools::SetKeyValue(CBaseEntity*, char const*, char const*)
+CServerTools::SetKeyValue(CBaseEntity*, char const*, float)
+CServerTools::SetKeyValue(CBaseEntity*, char const*, Vector const&)
+CServerTools::SetMoveType(CBaseEntity*, int, int)
+CServerTools::SetMoveType(CBaseEntity*, int)
+CServerTools::NextEntity(CBaseEntity*)
+CServerTools::RemoveEntity(CBaseEntity*)
+CServerTools::RemoveEntityImmediate(CBaseEntity*)
+CServerTools::RadiusDamage(CTakeDamageInfo const&, Vector const&, float, int, CBaseEntity*)
+
+CShower::Touch(CBaseEntity*)
+
+CSimplePhysicsProp::Use(CBaseEntity*, CBaseEntity*, USE_TYPE, float)
+
+CSimThinkManager::OnEntityCreated(CBaseEntity*)
+CSimThinkManager::OnEntityDeleted(CBaseEntity*)
+
+CSingleplayRules::AllowDamage(CBaseEntity*, CTakeDamageInfo const&)
+CSingleplayRules::GetTeamID(CBaseEntity*)
+CSingleplayRules::IsAllowedToSpawn(CBaseEntity*)
+CSingleplayRules::PlayerRelationship(CBaseEntity*, CBaseEntity*)
+
+CTeamplayRules::ClientCommand(CBaseEntity*, CCommand const&)
+CTeamplayRules::FPlayerCanTakeDamage(CBasePlayer*, CBaseEntity*)
+CTeamplayRules::GetTeamID(CBaseEntity*)
+CTeamplayRules::PlayerRelationship(CBaseEntity*, CBaseEntity*)
+
+CTempEntsSystem::ClientProjectile(IRecipientFilter&, float, Vector const*, Vector const*, int, int, CBaseEntity*)
+CTempEntsSystem::Fizz(IRecipientFilter&, float, CBaseEntity const*, int, int, int)
+
+CTongueEntitiesEnum::AddToList(CBaseEntity*)
+CTongueEntitiesEnum::CTongueEntitiesEnum(CBaseEntity**, int)
+
+CTriggerBrush::EndTouch(CBaseEntity*)
+CTriggerBrush::StartTouch(CBaseEntity*)
+CTriggerBrush::Use(CBaseEntity*, CBaseEntity*, USE_TYPE, float)
+
+CTriggerImpact::StartTouch(CBaseEntity*)
+
+CTriggerMultiple::MultiTouch(CBaseEntity*)
+CTriggerMultiple::ActivateMultiTrigger(CBaseEntity*)
+CTriggerPhysicsTrap::Touch(CBaseEntity*)
+
+CTriggerWeaponDissolve::CreateBeam(Vector const&, CBaseEntity*, float)
+CTriggerWeaponDissolve::GetConduitPoint(CBaseEntity*)
+CTriggerWeaponDissolve::StartTouch(CBaseEntity*)
+
+CWeapon_SLAM::SlamTouch(CBaseEntity*)
+CWaterBullet::Touch(CBaseEntity*)
+CWeaponBox::BoxTouch(CBaseEntity*)
+CWeaponBugBait::BugbaitStickyTouch(CBaseEntity*)
+
+CWatcherList::AddToList(CBaseEntity*)
+CWatcherList::Find(CBaseEntity*)
+CWatcherList::NotifyPositionChanged(CBaseEntity*)
+CWatcherList::NotifyVPhysicsStateChanged(IPhysicsObject*, CBaseEntity*, bool)
+CWatcherList::RemoveWatcher(CBaseEntity*)
+
+CWeaponPhysCannon::ApplyVelocityBasedForce(CBaseEntity*, Vector const&)
+CWeaponPhysCannon::AttachObject(CBaseEntity*, Vector const&)
+CWeaponPhysCannon::CanPickupObject(CBaseEntity*)
+CWeaponPhysCannon::DropIfEntityHeld(CBaseEntity*)
+CWeaponPhysCannon::EntityAllowsPunts(CBaseEntity*)
+CWeaponPhysCannon::Physgun_OnPhysGunPickup(CBaseEntity*, CBasePlayer*, PhysGunPickup_t)
+CWeaponPhysCannon::PuntNonVPhysics(CBaseEntity*, Vector const&, CGameTrace&)
+CWeaponPhysCannon::PuntRagdoll(CBaseEntity*, Vector const&, CGameTrace&)
+CWeaponPhysCannon::PuntVPhysics(CBaseEntity*, Vector const&, CGameTrace&)
+
+CWeaponStriderBuster::BusterTouch(CBaseEntity*)
+
+CWindowPane::PaneTouch(CBaseEntity*)
+
+CWeaponSWEP::AcceptInput(char const*, CBaseEntity*, CBaseEntity*, variant_t, int)
+CWeaponSWEP::EquipAmmo(CBaseEntity*)
+
+CSnark::IsValidEnemy(CBaseEntity*)
+CSnark::SuperBounceTouch(CBaseEntity*)
+
+CStomp::StompCreate(Vector&, Vector&, float, CBaseEntity*)
+
+CPhysicsPushedEntities::AddEntity(CBaseEntity*)
+CPhysicsPushedEntities::BeginPush(CBaseEntity*)
+CPhysicsPushedEntities::ComputeRotationalPushDirection(CBaseEntity*, CPhysicsPushedEntities::RotatingPushMove_t const&, Vector*, CBaseEntity*)
+CPhysicsPushedEntities::LinearlyMoveRootEntity(CBaseEntity*, float, Vector*)
+CPhysicsPushedEntities::PerformLinearPush(CBaseEntity*, float)
+CPhysicsPushedEntities::PerformRotatePush(CBaseEntity*, float)
+CPhysicsPushedEntities::RotateRootEntity(CBaseEntity*, float, CPhysicsPushedEntities::RotatingPushMove_t&)
+CPhysicsPushedEntities::SetupAllInHierarchy(CBaseEntity*)
+
+CPlatTrigger::Touch(CBaseEntity*)
+
+CPropVehicle::AddPhysicsChild(CBaseEntity*)
+CPropVehicle::RemovePhysicsChild(CBaseEntity*)
+
+CRagdollBoogie::AttachToEntity(CBaseEntity*)
+CRagdollBoogie::Create(CBaseEntity*, float, float, float, int)
+CRagdollBoogie::DecrementSuppressionCount(CBaseEntity*)
+CRagdollBoogie::IncrementSuppressionCount(CBaseEntity*)
+CRagdollMagnet::FindBestMagnet(CBaseEntity*)
+CRagdollMagnet::GetForceVector(CBaseEntity*)
+
+CRagdollProp::SetDamageEntity(CBaseEntity*)
+
+CPhysSlideConstraint::NotifyVPhysicsStateChanged(IPhysicsObject*, CBaseEntity*, bool)
+
+CPlayerPickupController::Init(CBasePlayer*, CBaseEntity*)
+CPlayerPickupController::IsHoldingEntity(CBaseEntity*)
+CPlayerPickupController::OnControls(CBaseEntity*)
+CPlayerPickupController::Use(CBaseEntity*, CBaseEntity*, USE_TYPE, float)
+
+CPointAngularVelocitySensor::SampleAngularVelocity(CBaseEntity*)
+
+CPropCombineBall::DissolveEntity(CBaseEntity*)
+CPropCombineBall::IsAttractiveTarget(CBaseEntity*)
+CPropCombineBall::IsHittableEntity(CBaseEntity*)
+CPropCombineBall::OnHitEntity(CBaseEntity*, float, int, gamevcollisionevent_t*)
+
+CPropEnergyBall::EndTouch(CBaseEntity*)
+CPropEnergyBall::NotifySystemEvent(CBaseEntity*, notify_system_event_t, notify_system_event_params_t const&)
+CPropEnergyBall::StartTouch(CBaseEntity*)
+
+CPushable::Use(CBaseEntity*, CBaseEntity*, USE_TYPE, float)
+
+CPropData::ParsePropFromBase(CBaseEntity*, char const*)
+CPropData::ParsePropFromKV(CBaseEntity*, KeyValues*, KeyValues*)
+
+CPropDoorRotating::BeginOpening(CBaseEntity*)
+
+CKnownEntity::Is(CBaseEntity*) const
+
+CItem::ItemTouch(CBaseEntity*)
+CItem::Use(CBaseEntity*, CBaseEntity*, USE_TYPE, float)
+CItemSoda::CanTouch(CBaseEntity*)
+
+CMissile::MissileTouch(CBaseEntity*)
+CRocket_Turret_Projectile::MissileTouch(CBaseEntity*)
+CRpgRocket::RocketTouch(CBaseEntity*)
+
+CRuleEntity::CanFireForActivator(CBaseEntity*)
+
+CSatchelCharge_HL1::SatchelTouch(CBaseEntity*)
+CSatchelCharge_HL1::SatchelUse(CBaseEntity*, CBaseEntity*, USE_TYPE, float)
+
+CSave::EntityIndex(CBaseEntity const*)
+CSave::WriteEHandle(CHandle<CBaseEntity> const*, int)
+CSave::WriteEHandle(char const*, CHandle<CBaseEntity> const*, int)
+CSave::WriteEntityPtr(CBaseEntity**, int)
+CSave::WriteEntityPtr(char const*, CBaseEntity**, int)
+CSave::WriteFunction(datamap_t*, char const*, void (CBaseEntity::***)(inputdata_t&), int)
+
+CRopeKeyframe::Create(CBaseEntity*, CBaseEntity*, int, int, int, char const*, int)
+CRopeKeyframe::CreateWithSecondPointDetached(CBaseEntity*, int, int, int, char const*, int, bool)
+CRopeKeyframe::GetEndPointPos(Vector*, CBaseEntity*, Vector, int, bool)
+CRopeKeyframe::GetEndPointPos2(CBaseEntity*, int, Vector&)
+CRopeKeyframe::NotifyPositionChanged(CBaseEntity*)
+CRopeKeyframe::PropagateForce(CBaseEntity*, CBaseEntity*, CBaseEntity*, float, float, float)
+CRopeKeyframe::SetAttachmentPoint(CBaseHandle&, short&, CBaseEntity*, int)
+CRopeKeyframe::SetEndPoint(CBaseEntity*, int)
+CRopeKeyframe::SetEntity(char const*, CBaseEntity*)
+CRopeKeyframe::SetParent(CBaseEntity*, int)
+CRopeKeyframe::SetStartPoint(CBaseEntity*, int)
+
+GMod::Util::OutputEntityInfo(CBaseEntity*)
+
+IContextualQuery::ShouldPickUp(INextBot const*, CBaseEntity*) const
+
+IBody::AimHeadTowards(CBaseEntity*, IBody::LookAtPriorityType, float, INextBotReply*, char const*)
+
+IIntention::ShouldPickUp(INextBot const*, CBaseEntity*) const
+
+ILocomotion::IsEntityTraversable(CBaseEntity*, ILocomotion::TraverseWhenType) const
+ILocomotion::ClimbUpToLedge(Vector const&, Vector const&, CBaseEntity const*)
+ILocomotion::OnLandOnGround(CBaseEntity*)
+ILocomotion::OnLeaveGround(CBaseEntity*)
+ILocomotion::ShouldCollideWith(CBaseEntity const*) const
+
+INextBot::GetRangeSquaredTo(CBaseEntity*) const
+INextBot::GetRangeTo(CBaseEntity*) const
+INextBot::IsAbleToBreak(CBaseEntity const*) const
+INextBot::IsAbleToClimbOnto(CBaseEntity const*) const
+INextBot::IsEnemy(CBaseEntity const*) const
+INextBot::IsFriend(CBaseEntity const*) const
+INextBot::IsRangeGreaterThan(CBaseEntity*, float) const
+INextBot::IsRangeLessThan(CBaseEntity*, float) const
+INextBot::IsSelf(CBaseEntity const*) const
+INextBot::ShouldTouch(CBaseEntity const*) const
+
+datamap_t* DataMapInit<CBaseEntity>(CBaseEntity*)
+datamap_t* DataMapInit<CBaseEntityOutput>(CBaseEntityOutput*)
+
+EntityMatrix::InitFromEntity(CBaseEntity*, int)
+EntityMatrix::InitFromEntityLocal(CBaseEntity*)
+
+FilterDamageType::PassesFilterImpl(CBaseEntity*, CBaseEntity*)
+FilterTeam::PassesFilterImpl(CBaseEntity*, CBaseEntity*)
+
+NextBotCombatCharacter::BecomeRagdoll(CTakeDamageInfo const&, Vector const&, CBaseEntity**)
+NextBotCombatCharacter::Ignite(float, CBaseEntity*)
+NextBotCombatCharacter::IsUseableEntity(CBaseEntity*, unsigned int)
+NextBotCombatCharacter::Touch(CBaseEntity*)
+NextBotCombatCharacter::UseEntity(CBaseEntity*, USE_TYPE)
+NextBotGroundLocomotion::ClimbUpToLedge(Vector const&, Vector const&, CBaseEntity const*)
+NextBotGroundLocomotion::OnLandOnGround(CBaseEntity*)
+NextBotGroundLocomotion::OnLeaveGround(CBaseEntity*)
+NextBotManager::OnSound(CBaseEntity*, Vector const&, KeyValues*)
+NextBotPlayer<CGMOD_Player>::SetSpawnPoint(CBaseEntity*)
+NextBotPlayer<CGMOD_Player>::Touch(CBaseEntity*)
+
+NWCEdit::RememberEntityPosition(CBaseEntity*)
+NWCEdit::UpdateEntityPosition(CBaseEntity*)
+
+PlayerBody::AimHeadTowards(CBaseEntity*, IBody::LookAtPriorityType, float, INextBotReply*, char const*)
+PlayerLocomotion::ClimbUpToLedge(Vector const&, Vector const&, CBaseEntity const*)
+PlayerLocomotion::IsClimbPossible(INextBot*, CBaseEntity const*) const
+
+RocketTrail::FollowEntity(CBaseEntity*, char const*)
+
+SmokeTrail::FollowEntity(CBaseEntity*, char const*)
+
+variant_t::SetEntity(CBaseEntity*)
+
+CreateKeepUpright(Vector const&, QAngle const&, CBaseEntity*, float, bool)
+CreateHelicopterAvoidanceSphere(CBaseEntity*, int, float, bool)
+CreateCombineBall(Vector const&, Vector const&, float, float, float, CBaseEntity*)  
+CreateConcussiveBlast(Vector const&, Vector const&, CBaseEntity*, float)
+CreateEntityFlame(CBaseEntity*)
+CreateFlare(Vector, QAngle, CBaseEntity*, float)
+CreateGibsFromList(CUtlVector<breakmodel_t, CUtlMemory<breakmodel_t, int> >&, int, IPhysicsObject*, breakablepropparams_t const&, CBaseEntity*, int, bool, bool, CUtlVector<CHandle<CBaseEntity>, CUtlMemory<CHandle<CBaseEntity>, int> >*, bool)
+CreateLaserDot(Vector const&, CBaseEntity*, bool)
+CreateInfoCameraLink(CBaseEntity*, CPointCamera*)
+CreateQuadraticBeam(char const*, Vector const&, Vector const&, Vector const&, float, CBaseEntity*)
+
+EntityMessageBegin(CBaseEntity*, bool)
+EntityPhysics_CreateSolver(CBaseEntity*, CBaseEntity*, bool, float)
+EntityTouch_Add(CBaseEntity*)
+
+ExplosionCreate(Vector const&, QAngle const&, CBaseEntity*, int, int, bool, CHandle<CBaseEntity> const*, Class_T, float, bool, bool, int)
+ExplosionCreate(Vector const&, QAngle const&, CBaseEntity*, int, int, bool, float, bool, bool, int)
+ExplosionCreate(Vector const&, QAngle const&, CBaseEntity*, int, int, int, float, CBaseEntity*, int, CHandle<CBaseEntity> const*, Class_T)
+
+FBoxVisible(CBaseEntity*, CBaseEntity*, Vector&, float)
+FindEntityMetaTable(CBaseEntity*)
+FindPhysicsAnchor(string_t, hl_constraint_info_t&, int, CBaseEntity*)
+FindPhysicsObjectByName(char const*, CBaseEntity*)
+FindPhysicsObjectByNameOrWorld(string_t, CBaseEntity*)
+
+FireSystem_GetFireDamageDimensions(CBaseEntity*, Vector*, Vector*)
+FireSystem_StartFire(CBaseAnimating*, float, float, float, int, CBaseEntity*, fireType_e)
+FireSystem_StartFire(Vector const&, float, float, float, int, CBaseEntity*, fireType_e)
+FireTargets(char const*, CBaseEntity*, CBaseEntity*, USE_TYPE, float)
+
+FuncLadder_GetSurfaceprops(CBaseEntity*)
+
+GetAllChildren_r(CBaseEntity*, CUtlVector<CBaseEntity*, CUtlMemory<CBaseEntity*, int> >&)
+GetAllChildren(CBaseEntity*, CUtlVector<CBaseEntity*, CUtlMemory<CBaseEntity*, int> >&)
+GetAllInHierarchy(CBaseEntity*, CUtlVector<CBaseEntity*, CUtlMemory<CBaseEntity*, int> >&)
+
+GetConstraintAttachments(CBaseEntity*, CBaseEntity**, IPhysicsObject**)
+GetModelName(CBaseEntity*)
+GetNextCommandEntity(CBasePlayer*, char const*, CBaseEntity*)
+GetObjectsOriginalParameters(CBaseEntity*, Vector&, QAngle&)
+GetPlayerHoldingEntity(CBaseEntity*)
+GetPushawayEnts(CBaseCombatCharacter*, CBaseEntity**, int, float, int, CPushAwayEnumerator*)
+GetRagdollChildAtPosition(CBaseEntity*, Vector const&)
+GetRotorWashShooter(CBaseEntity*)
+GetSceneFilename(CBaseEntity*)
+GetVelocityFromDamageForce(CTakeDamageInfo const&, CBaseEntity const*)
+GetSpringAttachments(CBaseEntity*, CBaseEntity**, IPhysicsObject**)
+GetVoterTeam(CBaseEntity*)
+GetZoomOwnerDesiredFOV(CBaseEntity*)
+
+IsAntlion(CBaseEntity*)
+IsAntlionWorker(CBaseEntity*)
+IsBreakableEntity(CBaseEntity*)
+IsEntityWalkable(CBaseEntity*, unsigned int) [clone .part.59]
+IsLineOfSightBetweenTwoEntitiesClear(CBaseEntity*, EEntityOffsetMode_t, CBaseEntity*, EEntityOffsetMode_t, CBaseEntity*, int, unsigned int, bool (*)(IHandleEntity*, int), float)
+IsManagedObjectAnItem(CBaseEntity*)
+IsManagedObjectAWeapon(CBaseEntity*)
+IsPushableEntity(CBaseEntity*)
+IsPushAwayEntity(CBaseEntity*)
+IsSacredEntity(CBaseEntity*)
+IsStaticPointEntity(CBaseEntity*)
+IsStriderBuster(CBaseEntity*)
+IsTriggerClass(CBaseEntity*)
+IsValidPhysicsTarget(CBaseEntity*)
+IsViewModelMoveParent(CBaseEntity*)
+IterateActivePhysicsEntities(void (*)(CBaseEntity*))
+
+KillFlare(CBaseEntity*, CBaseEntity*, float)
+LinkChild(CBaseEntity*, CBaseEntity*)
+LookerCouldSeeTargetInDarkness(CBaseEntity*, CBaseEntity*)
+MapEntity_ParseEntity(CBaseEntity*&, char const*, IMapEntityFilter*)
+MarkVPhysicsDebug(CBaseEntity*)
+MessageWriteEHandle(CBaseEntity*)
+MoveToGround(Vector*, CBaseEntity*, Vector const&, Vector const&)
+
+HateThisStriderBuster(CBaseEntity*)
+
+DarknessLightSourceWithinRadius(CBaseEntity*, float)
+DebugConstraint(CBaseEntity*)
+DebugConstraints(CBaseEntity*)
+DescribeGroundList(CBaseEntity*)
+DetachAttachedRagdoll(CBaseEntity*)
+DetachAttachedRagdollsForEntity(CBaseEntity*)
+DispatchActivate(CBaseEntity*)
+DispatchSpawn(CBaseEntity*)
+
+DispatchParticleEffect(char const*, ParticleAttachment_t, CBaseEntity*, char const*, bool)
+DispatchParticleEffect(char const*, ParticleAttachment_t, CBaseEntity*, char const*, Vector, Vector, bool, bool)
+DispatchParticleEffect(char const*, ParticleAttachment_t, CBaseEntity*, int, bool)
+DispatchParticleEffect(char const*, Vector, QAngle, CBaseEntity*)
+DispatchParticleEffect(char const*, Vector, QAngle, Vector, Vector, bool, CBaseEntity*, int)
+DispatchParticleEffect(char const*, Vector, Vector, QAngle, CBaseEntity*)
+DispatchParticleEffect(int, Vector, Vector, QAngle, CBaseEntity*)
+
+DoSpark(CBaseEntity*, Vector const&, int, int, bool, Vector const&)
+DynamicResupply_InitFromAlternateMaster(CBaseEntity*, string_t)
+EnableLaserDot(CBaseEntity*, bool)
+EnablePhysBeam(CBaseEntity*, bool)
+ENTINDEX(CBaseEntity*)
+EntityIsParentOf(CBaseEntity*, CBaseEntity*)
+
+GMOD_FixDoorPAS(CBaseEntity*, CPASAttenuationFilter&)
+GMOD_NotifyAmmoChanged(CBaseEntity*, int, int, int)
+GMOD_NotifyAmmoChanged(CBaseEntity*, int, int, int) [clone .part.15]
+
+NPC_Antlion_IsAntlion(CBaseEntity*)
+NPC_CheckBrushExclude(CBaseEntity*, CBaseEntity*)
+NPC_Rollermine_DropFromPoint(Vector const&, CBaseEntity*, char const*)
+NPC_Rollermine_IsRollermine(CBaseEntity*)
+
+NPCPhysics_CreateSolver(CAI_BaseNPC*, CBaseEntity*, bool, float)
+NPCPhysics_SolverExists(CAI_BaseNPC*, CBaseEntity*)
+
+OnEntityAboutToBeRemoved(CBaseEntity*)
+OutputVPhysicsDebugInfo(CBaseEntity*)
+OverrideMoveCache_FindTargetsInRadius(CBaseEntity*, Vector const&, float)
+
+PhysAddShadow(CBaseEntity*)
+PhysBreakSound(CBaseEntity*, IPhysicsObject*, Vector)
+PhysCallbackDamage(CBaseEntity*, CTakeDamageInfo const&, gamevcollisionevent_t&, int)
+PhysCallbackDamage(CBaseEntity*, CTakeDamageInfo const&)
+PhysCannonAccountableForObject(CBaseCombatWeapon*, CBaseEntity*)
+PhysCannonForceDrop(CBaseCombatWeapon*, CBaseEntity*)
+PhysCleanupFrictionSounds(CBaseEntity*)
+PhysCollisionSound(CBaseEntity*, IPhysicsObject*, int, int, int, float, float)
+PhysCreateVirtualTerrain(CBaseEntity*, objectparams_t const&)
+PhysCreateWorld_Shared(CBaseEntity*, vcollide_t*, objectparams_t const&)
+PhysDestroyObject(IPhysicsObject*, CBaseEntity*)
+PhysDisableEntityCollisions(CBaseEntity*, CBaseEntity*)
+PhysEnableEntityCollisions(CBaseEntity*, CBaseEntity*)
+PhysEntityCollisionsAreDisabled(CBaseEntity*, CBaseEntity*)
+PhysForceEntityToSleep(CBaseEntity*, IPhysicsObject*)
+PhysForceEntityToSleep(CBaseEntity*, IPhysicsObject*) [clone .part.36]
+PhysFrictionSound(CBaseEntity*, IPhysicsObject*, char const*, short&, float)
+PhysFrictionSound(CBaseEntity*, IPhysicsObject*, float, int, int)
+PhysGetEntityMass(CBaseEntity*)
+PhysGetListOfPenetratingEntities(CBaseEntity*, CUtlVector<CBaseEntity*, CUtlMemory<CBaseEntity*, int> >&)
+PhysGetMassCenterOverride(CBaseEntity*, vcollide_t*, solid_t&)
+PhysGetTriggerEvent(triggerevent_t*, CBaseEntity*)
+PhysGunForceDrop(CBaseCombatWeapon*, CBaseEntity*)
+PhysHasShadow(CBaseEntity*)
+Physics_SimulateEntity(CBaseEntity*)
+Physics_TraceEntity(CBaseEntity*, Vector const&, Vector const&, unsigned int, CGameTrace*)
+PhysicsCheckSweep(CBaseEntity*, Vector const&, Vector const&, CGameTrace*)
+PhysicsCommand(CCommand const&, void (*)(CBaseEntity*))
+PhysicsImpactSound(CBaseEntity*, IPhysicsObject*, int, int, int, float, float)
+PhysicsSplash(IPhysicsFluidController*, IPhysicsObject*, CBaseEntity*)
+PhysModelCreate(CBaseEntity*, int, Vector const&, QAngle const&, solid_t*)
+PhysModelCreateBox(CBaseEntity*, Vector const&, Vector const&, Vector const&, bool)
+PhysModelCreateCustom(CBaseEntity*, CPhysCollide const*, Vector const&, QAngle const&, char const*, bool, solid_t*)
+PhysModelCreateOBB(CBaseEntity*, Vector const&, Vector const&, Vector const&, QAngle const&, bool)
+PhysModelCreateUnmoveable(CBaseEntity*, int, Vector const&, QAngle const&)
+PhysModelParseSolid(solid_t&, CBaseEntity*, int)
+PhysModelParseSolidByIndex(solid_t&, CBaseEntity*, int, int)
+PhysModelParseSolidByIndex(solid_t&, CBaseEntity*, vcollide_t*, int)
+PhysRemoveShadow(CBaseEntity*)
+PhysSetEntityGameFlags(CBaseEntity*, unsigned short)
+PhysSphereCreate(CBaseEntity*, float, Vector const&, solid_t&)
+PhysTeleportConstrainedEntity(CBaseEntity*, IPhysicsObject*, IPhysicsObject*, Vector const&, QAngle const&, bool)
+
+Pickup_ForcePhysGunOpen(CBaseEntity*, CBasePlayer*)
+Pickup_ForcePlayerToDropThisObject(CBaseEntity*)
+Pickup_GetPreferredCarryAngles(CBaseEntity*, CBasePlayer*, matrix3x4_t&, QAngle&)
+Pickup_OnAttemptPhysGunPickup(CBaseEntity*, CBasePlayer*, PhysGunPickup_t)
+Pickup_OnFailedPhysGunPickup(CBaseEntity*, Vector)
+Pickup_OnPhysGunDrop(CBaseEntity*, CBasePlayer*, PhysGunDrop_t)
+Pickup_OnPhysGunPickup(CBaseEntity*, CBasePlayer*, PhysGunPickup_t)
+Pickup_PhysGunLaunchAngularImpulse(CBaseEntity*, PhysGunForce_t)
+Pickup_PhysGunLaunchVelocity(CBaseEntity*, Vector const&, PhysGunForce_t)
+Pickup_ShouldPuntUseLaunchForces(CBaseEntity*, PhysGunForce_t)
+
+PlayerPickupControllerIsHoldingEntity(CBaseEntity*, CBaseEntity*)
+PlayerPickupGetHeldObjectMass(CBaseEntity*, IPhysicsObject*)
+PlayerPickupObject(CBasePlayer*, CBaseEntity*)
+PlayerPickupObjectDestroyed(CBasePlayer*, CBaseEntity*)
+PlayLockSounds(CBaseEntity*, locksound_t*, int, int)
+PointCameraSetupVisibility(CBaseEntity*, int, unsigned char*, int)
+PropBreakableCapEdictsOnCreateAll(int, IPhysicsObject*, breakablepropparams_t const&, CBaseEntity*, int)
+PropBreakableCreateAll(int, IPhysicsObject*, breakablepropparams_t const&, CBaseEntity*, int, bool, bool)
+PropBreakableCreateAll(int, IPhysicsObject*, Vector const&, QAngle const&, Vector const&, Vector const&, float, float, int, CBaseEntity*, bool)
+PropIsGib(CBaseEntity*)
+Push_EHandle(CHandle<CBaseEntity>)
+Push_Entity(CBaseEntity*)
+
+RadiusDamage(CTakeDamageInfo const&, Vector const&, float, int, CBaseEntity*)
+Ragdoll_GetAngleOverrideString(char*, int, CBaseEntity*)
+Ragdoll_GetRagdoll(CBaseEntity*)
+Ragdoll_IsPropRagdoll(CBaseEntity*)
+RagdollDestroy(ragdoll_t&, CBaseEntity*)
+RagdollSolveSeparation(ragdoll_t&, CBaseEntity*)
+ReloadSceneFromDisk(CBaseEntity*)
+RemoveEntityFromDarknessCheck(CBaseEntity*)
+RemovePositionWatcher(CBaseEntity*, CBaseEntity*)
+RemoveVPhysicsStateWatcher(CBaseEntity*, CBaseEntity*)
+ReportPositionChanged(CBaseEntity*)
+ReportVPhysicsStateChanged(IPhysicsObject*, CBaseEntity*, bool)
+respawn(CBaseEntity*, bool)
+
+SaveEntityOnTable(CBaseEntity*, CSaveRestoreData*, int&)
+ScratchPad_DrawEntityToScratchPad(IScratchPad3D*, unsigned long, CBaseEntity*, Vector const&)
+SetDataTableVar(CBaseEntity*, IGMODDataTable*, char const*, CGMODVariant const&)
+SetLaserDotTarget(CBaseEntity*, CBaseEntity*)
+SetMinMaxSize(CBaseEntity*, Vector const&, Vector const&)
+SetPhysicsObjectFromPhysCollide(CBaseEntity*, CPhysCollide*, int)
+ShouldVehicleIgnoreEntity(CBaseEntity*, CBaseEntity*)
+SimThink_EntityChanged(CBaseEntity*)
+SimThink_ListCopy(CBaseEntity**, int)
+StopParticleEffects(CBaseEntity*)
+StopScriptedScene(CBaseFlex*, CHandle<CBaseEntity>)
+StriderBuster_GetPickupTime(CBaseEntity*)
+StriderBuster_IsAttachedStriderBuster(CBaseEntity*, CBaseEntity*)
+StriderBuster_NumFlechettesAttached(CBaseEntity*)
+StriderBuster_OnAddToCargoHold(CBaseEntity*)
+StriderBuster_OnFlechetteAttach(CBaseEntity*, Vector&)
+StriderBuster_WasKnockedOffStrider(CBaseEntity*)
+
+TE_ClientProjectile(IRecipientFilter&, float, Vector const*, Vector const*, int, int, CBaseEntity*)
+TE_Fizz(IRecipientFilter&, float, CBaseEntity const*, int, int, int)
+Templates_Add(CBaseEntity*, char const*, int)
+TestEntityTriggerIntersection_Accurate(CBaseEntity*, CBaseEntity*)
+TransferChildren(CBaseEntity*, CBaseEntity*)
+TransferPhysicsObject(CBaseEntity*, CBaseEntity*, bool)
+
+UnlinkAllChildren(CBaseEntity*)
+UnlinkChild(CBaseEntity*, CBaseEntity*)
+UnlinkFromParent(CBaseEntity*)
+
+UpdateBeam(CBaseEntity*, CBaseEntity*, Vector const&, CBaseEntity*, int)
+UpdateEntityPenetrationFlag(CBaseEntity*, bool)
+
+UTIL_CheckBottom(CBaseEntity*, ITraceFilter*, float)
+UTIL_DropToFloor(CBaseEntity*, unsigned int, CBaseEntity*)
+UTIL_EntitiesInPVS(CBaseEntity*, CBaseEntity*)
+UTIL_EntityHasMatchingRootParent(CBaseEntity*, CBaseEntity*)
+UTIL_EntityInSolid(CBaseEntity*)
+UTIL_FunctionToName(datamap_t*, void (CBaseEntity::**)(inputdata_t&))
+UTIL_HudHintText(CBaseEntity*, char const*)
+UTIL_IsAR2CombineBall(CBaseEntity*)
+UTIL_IsCombineBall(CBaseEntity*)
+UTIL_IsCombineBallDefinite(CBaseEntity*)
+UTIL_IsFacingWithinTolerance(CBaseEntity*, CBaseEntity*, float, float*)
+UTIL_IsFacingWithinTolerance(CBaseEntity*, Vector const&, float, float*)
+UTIL_IsMasterTriggered(string_t, CBaseEntity*)
+UTIL_IsSpaceEmpty(CBaseEntity*, Vector const&, Vector const&)
+UTIL_IsValidEntity(CBaseEntity*)
+UTIL_ItemCanBeTouchedByPlayer(CBaseEntity*, CBasePlayer*)
+UTIL_ParentToWorldSpace(CBaseEntity*, Vector&, QAngle&)
+UTIL_ParentToWorldSpace(CBaseEntity*, Vector&, Quaternion&)
+UTIL_PhyscannonTraceHull(Vector const&, Vector const&, Vector const&, Vector const&, CBaseEntity*, CGameTrace*)
+UTIL_PhyscannonTraceLine(Vector const&, Vector const&, CBaseEntity*, CGameTrace*)
+UTIL_PointAtEntity(CBaseEntity*, CBaseEntity*)
+UTIL_PointAtNamedEntity(CBaseEntity*, string_t)
+UTIL_PredictedPosition(CBaseEntity*, float, Vector*)
+UTIL_Remove(CBaseEntity*)
+UTIL_RemoveHierarchy(CBaseEntity*)
+UTIL_RemoveImmediate(CBaseEntity*)
+UTIL_ScreenFade(CBaseEntity*, color32_s const&, float, float, int)
+UTIL_ScreenFadeWrite(ScreenFade_t const&, CBaseEntity*)
+UTIL_ScreenShakeObject(CBaseEntity*, Vector const&, float, float, float, float, ShakeCommand_t, bool)
+UTIL_SetModel(CBaseEntity*, char const*)
+UTIL_SetOrigin(CBaseEntity*, Vector const&, bool)
+UTIL_SetSize(CBaseEntity*, Vector const&, Vector const&)
+UTIL_TraceEntity(CBaseEntity*, Vector const&, Vector const&, unsigned int, CGameTrace*)
+UTIL_TraceEntity(CBaseEntity*, Vector const&, Vector const&, unsigned int, IHandleEntity const*, int, CGameTrace*)
+UTIL_TraceEntity(CBaseEntity*, Vector const&, Vector const&, unsigned int, ITraceFilter*, CGameTrace*)
+UTIL_TraceLineFilterEntity(CBaseEntity*, Vector const&, Vector const&, unsigned int, int, CGameTrace*)
+UTIL_TraceModel(Vector const&, Vector const&, Vector const&, Vector const&, CBaseEntity*, int, CGameTrace*)
+UTIL_TransferPoseParameters(CBaseEntity*, CBaseEntity*)
+UTIL_WorldToParentSpace(CBaseEntity*, Vector&, QAngle&)
+UTIL_WorldToParentSpace(CBaseEntity*, Vector&, Quaternion&)
+
+VecCheckSplatToss(CBaseEntity*, Vector const&, Vector, float)
+VecCheckThrow(CBaseEntity*, Vector const&, Vector, float, float, Vector*, Vector*)
+VecCheckThrowTolerance(CBaseEntity*, Vector const&, Vector, float, float)
+VecCheckToss(CBaseEntity*, ITraceFilter*, Vector, Vector, float, float, bool, Vector*, Vector*)
+VecCheckToss(CBaseEntity*, Vector, Vector, float, float, bool, Vector*, Vector*)
+
+WatchPositionChanges(CBaseEntity*, CBaseEntity*)
+WatchVPhysicsStateChanges(CBaseEntity*, CBaseEntity*)
+WeaponManager_AddManaged(CBaseEntity*)
+WeaponManager_RemoveManaged(CBaseEntity*)
+WheelCollidesWith(IPhysicsObject*, CBaseEntity*)
