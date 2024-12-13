@@ -332,7 +332,7 @@ auto updateEntityPenetrationFlagHook = [](CBaseEntity* result, bool isPenetratin
   return;
 };
 
-auto interPenetrationHook = [](void* anomalyManager, void* pObject0, void* pObject1, void* pOutput, double deltaTime) {
+auto interPenetrationHook = [](void* anomalyManager, void* mindist, void* pObject0, void* pObject1, double speedChange) {
   auto LUA = propitate.GetLua();
   if (!LUA)
     return;
