@@ -1,19 +1,67 @@
 #pragma once
-//#include "ivp_sdk/ivp_anomaly_manager.hpp"
+#include "ivp_sdk/ivp_anomaly_manager.hpp"
+#include "../../sourcesdk-minimal/game/server/physics_collisionevent.h"
+#include <chrono>
+#include <queue>
+#include <algorithm>
 using namespace GarrysMod::Lua;
 
+int  recordNextCollisionAmount = 0;
+int  collisionsThisFrame = 0;
+int  penetrationsThisFrame = 0;
+bool emptyFreezeQueue = false;
+bool emptyCollisionQueue = false;
+
+const int MAX_COLLISIONS_PER_TICK = 60;
+const int MAX_PENETRATIONS_PER_TICK = 300;
+
+std::vector<int> frozenEntities;
+std::queue<IPhysicsObject*> freezeQueue;
+std::queue<vcollisionevent_t*> collisionQueue;
+
+void togglePhysicsObjectFreeze(IPhysicsObject* pObject, bool freeze) {
+  if (!pObject)
+    return;
+
+  if (freeze)
+  {
+    pObject->EnableMotion(false);
+    if (!pObject->IsAsleep())
+      pObject->Sleep();
+  }
+  else
+  {
+    pObject->EnableMotion(true);
+    if (pObject->IsAsleep())
+      pObject->Wake();
+  }
+}
+
+void iteratorPhysicsObjectsList(IPhysicsObject** pObjectList, int objectCount, std::function<void(IPhysicsObject*)> callback) {
+  for (int i = 0; i < objectCount; ++i)
+  {
+    IPhysicsObject* pObject = pObjectList[i];
+    if (!pObject)
+      continue;
+
+    callback(pObject);
+  }
+}
+
 // server_srv.so
-using additionalCollisionChecksThisTickFn = int (*)(void*, int);
-using shouldFreezeContactsFn = bool (*)(void*, IPhysicsObject**, int);
-using objectWakeFn = void (*)(void*, IPhysicsObject*);
-using objectSleepFn = void (*)(void*, IPhysicsObject*);
+using additionalCollisionChecksThisTickFn = int (*)(CCollisionEvent*, int);
+using shouldFreezeContactsFn = bool (*)(CCollisionEvent*, IPhysicsObject**, int);
+using objectWakeFn = void (*)(CCollisionEvent*, IPhysicsObject*);
+using objectSleepFn = void (*)(CCollisionEvent*, IPhysicsObject*);
 using physFrameFn = void (*)(float);
-using shouldSolvePenetrationFn = int (*)(void*, IPhysicsObject*, IPhysicsObject*, void*, void*, float); // CCollisionEvent, IPhysicsObject, IPhysicsObject, (cast to CBaseEntity), (cast to CBaseEntity), float
+using shouldSolvePenetrationFn = int (*)(CCollisionEvent*, IPhysicsObject*, IPhysicsObject*, void*, void*, float); // CCollisionEvent, IPhysicsObject, IPhysicsObject, (cast to CBaseEntity), (cast to CBaseEntity), float
 using shouldFreezeObjectFn = bool (*)(void*, IPhysicsObject*);
 using updateEntityPenetrationFlagFn = void (*)(CBaseEntity*, bool);
+using postCollisionFn = void (*)(CCollisionEvent*, vcollisionevent_t*);
 
 // vphysics_srv.so
-using interPenetrationFn = void (*)(void*, void*, void*, void*, double);
+//int __cdecl IVP_Anomaly_Manager::inter_penetration(IVP_Anomaly_Manager *this, IVP_Mindist *, IVP_Real_Object *, IVP_Real_Object *, double)
+using interPenetrationFn = void (*)(IVP_Anomaly_Manager*, void*, void*, void*, double);
 
 DetourWrapper<additionalCollisionChecksThisTickFn> additionalCollisionChecksThisTickDetour("AdditionalCollisionChecksThisTick");
 DetourWrapper<shouldFreezeContactsFn> shouldFreezeContactsDetour("ShouldFreezeContacts");
@@ -23,6 +71,8 @@ DetourWrapper<physFrameFn> physFrameDetour("PhysFrame");
 DetourWrapper<shouldSolvePenetrationFn> shouldSolvePenetrationDetour("ShouldSolvePenetration");
 DetourWrapper<shouldFreezeObjectFn> shouldFreezeObjectDetour("ShouldFreezeObject");
 DetourWrapper<updateEntityPenetrationFlagFn> updateEntityPenetrationFlagDetour("UpdateEntityPenetrationFlag");
+DetourWrapper<postCollisionFn> postCollisionDetour("PostCollision");
+
 DetourWrapper<interPenetrationFn> interPenetrationDetour("interPenetration");
 
 const std::vector<Symbol> additionalCollisionChecksThisTickSymbols = {
@@ -57,11 +107,15 @@ const std::vector<Symbol> updateEntityPenetrationFlagSymbols = {
   Symbol::FromName("_ZL27UpdateEntityPenetrationFlagP11CBaseEntityb")
 };
 
+const std::vector<Symbol> postCollisionSymbols = {
+  Symbol::FromName("_ZN15CCollisionEvent13PostCollisionEP17vcollisionevent_t")
+};
+
 const std::vector<Symbol> interPenetrationSymbols = {
   Symbol::FromName("_ZN19IVP_Anomaly_Manager17inter_penetrationEP11IVP_MindistP15IVP_Real_ObjectS3_d")
 };
 
-auto additionalCollisionChecksThisTickHook = [](void* ptr, int extraCollisionsThisTick) -> int {
+auto additionalCollisionChecksThisTickHook = [](CCollisionEvent* cCollisionEvent, int extraCollisionsThisTick) -> int {
   auto LUA = propitate.GetLua();
   if (!LUA)
     return 0;
@@ -94,60 +148,40 @@ auto additionalCollisionChecksThisTickHook = [](void* ptr, int extraCollisionsTh
   return additionalCollisionsToCheck;
 };
 
-auto shouldFreezeContactsHook = [](void *cCollisionEvent, IPhysicsObject **physList, int touchedAmount) -> bool {
-  bool shouldFreeze = false;
-  auto LUA = propitate.GetLua();
-  if (!LUA)
-    return false;
-  
+auto shouldFreezeContactsHook = [](CCollisionEvent *cCollisionEvent, IPhysicsObject **physList, int touchedAmount) -> bool {  
   int mLastTickFrictionError = *reinterpret_cast<int*>(cCollisionEvent + 0x160);
   int tickCount = propitate.GetGlobalVars()->tickcount;
   
   if (mLastTickFrictionError > tickCount || mLastTickFrictionError <= tickCount - 1)
   {
-    LUA->PushSpecial(SPECIAL_GLOB);
-    LUA->GetField(-1, "hook");
-    LUA->GetField(-1, "Run");
-    LUA->PushString("ShouldFreezeContacts");
-    LUA->PushNumber(touchedAmount);
-    
-    LUA->CreateTable();
-    for (int i = 0; i < touchedAmount; ++i)
-    {
-      LUA->PushNumber(i + 1);
-      IPhysicsObject *physObj = physList[i];
-      CBaseEntity *entity = static_cast<CBaseEntity*>(physObj->GetGameData());
-
-      int entIndex = entity->entindex();
-      LUA->PushNumber(entIndex);
-      LUA->SetTable(-3);
-    }
-    
-    if (LUA->PCall(3, 1, 0))
-    {
-      //printf("Error: %s\n", LUA->GetString(-1));
-      LUA->Pop(1);
-    }
-    else
-    {
-      if (LUA->IsType(-1, Type::Bool))
-      {
-        shouldFreeze = LUA->GetBool(-1);
-        //printf("Should freeze: %d\n", shouldFreeze);
-      }
-      LUA->Pop(1);
-    }
-
-    LUA->Pop(2);
-
     mLastTickFrictionError = tickCount;
-    return shouldFreeze;
+
+    if (touchedAmount >= 40)
+    {
+      iteratorPhysicsObjectsList(physList, touchedAmount, [](IPhysicsObject* pObject) {
+        if (!pObject)
+          return;
+
+        CBaseEntity* pEntity = static_cast<CBaseEntity*>(pObject->GetGameData());
+        if (!pEntity)
+          return;
+
+        if (!pEntity->IsPlayer())
+        {
+          freezeQueue.push(pObject);
+        }
+      });
+
+      emptyFreezeQueue = true;
+    }
+
+    return true;
   }
 
   return false;
 };
 
-auto objectWakeHook = [](void* cCollisionEvent, IPhysicsObject* pObject) {
+auto objectWakeHook = [](CCollisionEvent* cCollisionEvent, IPhysicsObject* pObject) {
   auto LUA = propitate.GetLua();
   if (!LUA)
   {
@@ -187,7 +221,7 @@ auto objectWakeHook = [](void* cCollisionEvent, IPhysicsObject* pObject) {
   return;
 };
 
-auto objectSleepHook = [](void* cCollisionEvent, IPhysicsObject* pObject) {
+auto objectSleepHook = [](CCollisionEvent* cCollisionEvent, IPhysicsObject* pObject) {
   auto LUA = propitate.GetLua();
   if (!LUA)
   {
@@ -234,50 +268,60 @@ auto objectSleepHook = [](void* cCollisionEvent, IPhysicsObject* pObject) {
 };
 
 auto physFrameHook = [](float deltaTime) {
-  if (!propitate.GetShouldSimulate())
+  if (!propitate.GetShouldSimulate()) {
     return;
+  }
+
+  collisionsThisFrame = 0;
+  penetrationsThisFrame = 0;
   
+  if (emptyFreezeQueue) {
+    while (!freezeQueue.empty()) {
+      IPhysicsObject* pObject = freezeQueue.front();
+      freezeQueue.pop();
+      
+      if (pObject && pObject->GetGameData()) {
+        togglePhysicsObjectFreeze(pObject, true);
+        //auto entity = static_cast<CBaseEntity*>(pObject->GetGameData());
+        //printf("Freezing object %d\n", entity->entindex());
+      }
+    }
+    emptyFreezeQueue = false;
+  }
+  
+  if (emptyCollisionQueue) {
+    while (!collisionQueue.empty()) {
+      vcollisionevent_t* pEvent = collisionQueue.front();
+      collisionQueue.pop();
+      
+      if (pEvent) {
+        auto index0 = static_cast<CBaseEntity*>(pEvent->pObjects[0]->GetGameData())->entindex();
+        auto index1 = static_cast<CBaseEntity*>(pEvent->pObjects[1]->GetGameData())->entindex();
+        if (std::find(frozenEntities.begin(), frozenEntities.end(), index0) != frozenEntities.end() || std::find(frozenEntities.begin(), frozenEntities.end(), index1) != frozenEntities.end())
+          continue;
+
+        togglePhysicsObjectFreeze(pEvent->pObjects[0], true);
+        togglePhysicsObjectFreeze(pEvent->pObjects[1], true);
+        //printf("Freezing objects %d and %d\n", static_cast<CBaseEntity*>(pEvent->pObjects[0]->GetGameData())->entindex(), static_cast<CBaseEntity*>(pEvent->pObjects[1]->GetGameData())->entindex());
+        frozenEntities.push_back(index0);
+        frozenEntities.push_back(index1);
+      }
+    }
+
+    frozenEntities.clear();
+    emptyCollisionQueue = false;
+  }
+
   physFrameDetour.CallOriginal(deltaTime);
 };
 
-auto shouldSolvePenetrationHook = [](void* cCollisionEvent, IPhysicsObject* pObject0, IPhysicsObject* pObject1, void* pSurf, void* pOutput, float deltaTime) -> int {
-  auto LUA = propitate.GetLua();
-  if (!LUA)
-    return shouldSolvePenetrationDetour.CallOriginal(cCollisionEvent, pObject0, pObject1, pSurf, pOutput, deltaTime);
-
-  LUA->PushSpecial(SPECIAL_GLOB);
-  LUA->GetField(-1, "hook");
-  LUA->GetField(-1, "Run");
-  LUA->PushString("ShouldSolvePenetration");
-  LUA->PushNumber(static_cast<CBaseEntity*>(pObject0->GetGameData())->entindex());
-  LUA->PushNumber(static_cast<CBaseEntity*>(pObject1->GetGameData())->entindex());
-  LUA->PushNumber(deltaTime);
-
-  int result = shouldSolvePenetrationDetour.CallOriginal(cCollisionEvent, pObject0, pObject1, pSurf, pOutput, deltaTime);
-
-  if (LUA->PCall(4, 1, 0))
-  {
-    printf("Error in ShouldSolvePenetration hook: %s\n", LUA->GetString(-1));
-    LUA->Pop(1);
-  }
-  else
-  {
-    if (LUA->IsType(-1, Type::Number))
-    {
-      result = LUA->GetNumber(-1);
-    }
-    else if (LUA->IsType(-1, Type::Bool))
-    {
-      result = LUA->GetBool(-1) ? 1 : 0;
-    }
-    LUA->Pop(1);
-  }
-
-  LUA->Pop(2);
-  return result;
+auto shouldSolvePenetrationHook = [](CCollisionEvent* cCollisionEvent, IPhysicsObject* pObject0, IPhysicsObject* pObject1, void* pSurf, void* pOutput, float deltaTime) -> int {
+  //shouldSolvePenetrationDetour.CallOriginal(cCollisionEvent, pObject0, pObject1, pSurf, pOutput, deltaTime);
+  
+  return shouldSolvePenetrationDetour.CallOriginal(cCollisionEvent, pObject0, pObject1, pSurf, pOutput, deltaTime);
 };
 
-auto shouldFreezeObjectHook = [](void* cCollisionEvent, IPhysicsObject* pObject) -> bool {
+auto shouldFreezeObjectHook = [](CCollisionEvent* cCollisionEvent, IPhysicsObject* pObject) -> bool {
   auto LUA = propitate.GetLua();
   if (!LUA)
     return shouldFreezeObjectDetour.CallOriginal(cCollisionEvent, pObject);
@@ -332,13 +376,76 @@ auto updateEntityPenetrationFlagHook = [](CBaseEntity* result, bool isPenetratin
   return;
 };
 
-auto interPenetrationHook = [](void* anomalyManager, void* mindist, void* pObject0, void* pObject1, double speedChange) {
-  auto LUA = propitate.GetLua();
-  if (!LUA)
-    return;
+auto postCollisionHook = [](CCollisionEvent* cCollisionEvent, vcollisionevent_t* pEvent) {
+  collisionsThisFrame++;
+  
+  if (penetrationsThisFrame > MAX_PENETRATIONS_PER_TICK)
+  {
+    collisionQueue.push(pEvent);
+    emptyCollisionQueue = true;
+    //printf("Penetrations this frame: %d\n", penetrationsThisFrame);
+  }
 
-  printf("Interpenetration detected\n");
+  postCollisionDetour.CallOriginal(cCollisionEvent, pEvent);
 };
+
+auto interPenetrationHook = [](IVP_Anomaly_Manager* anomalyManager, void* mindist, void* pObject0, void* pObject1, double speedChange) {
+  penetrationsThisFrame++;
+
+  if (penetrationsThisFrame > MAX_PENETRATIONS_PER_TICK)
+  {
+    return;
+  }
+
+  return interPenetrationDetour.CallOriginal(anomalyManager, mindist, pObject0, pObject1, speedChange);
+};
+
+LUA_FUNCTION(Propitate_GetMetrics) {
+  LUA->CreateTable();
+
+  LUA->PushNumber(collisionsThisFrame);
+  LUA->SetField(-2, "collisionsThisFrame");
+
+  LUA->PushNumber(penetrationsThisFrame);
+  LUA->SetField(-2, "penetrationsThisFrame");
+  
+  return 1;
+}
+
+void registerLuaFunctions(ILuaBase* LUA) {
+  LUA->PushSpecial(SPECIAL_GLOB);
+  LUA->GetField(-1, "Propitate");
+  
+  if (!LUA->IsType(-1, Type::Table)) {
+    printf("Propitate table not found, creating\n");
+    LUA->Pop(1);
+    LUA->CreateTable();
+    LUA->SetField(-2, "Propitate");
+    LUA->GetField(-1, "Propitate");
+    printf("Propitate table created\n");
+  }
+
+  LUA->PushString("GetMetrics");
+  LUA->PushCFunction(Propitate_GetMetrics);
+  LUA->SetTable(-3);
+  printf("Registered GetMetrics\n");
+  
+  LUA->Pop();
+}
+
+void unRegisterLuaFunctions(ILuaBase* LUA) {
+  LUA->PushSpecial(SPECIAL_GLOB);
+  LUA->GetField(-1, "Propitate");
+
+  if (!LUA->IsType(-1, Type::Table)) {
+    LUA->Pop(1);
+    return;
+  }
+
+  LUA->PushString("GetMetrics");
+  LUA->PushNil();
+  LUA->SetTable(-3);
+}
 
 bool vphysInit(SourceSDK::ModuleLoader serverLoader) {
   printf("Initializing vphysics hooks, serverLoader: %p\n", serverLoader.GetModule());
@@ -347,11 +454,13 @@ bool vphysInit(SourceSDK::ModuleLoader serverLoader) {
   //objectWakeDetour.Init(serverLoader, objectWakeSymbols, objectWakeHook);
   //objectSleepDetour.Init(serverLoader, objectSleepSymbols, objectSleepHook);
   physFrameDetour.Init(serverLoader, physFrameSymbols, physFrameHook);
-  //shouldSolvePenetrationDetour.Init(serverLoader, shouldSolvePenetrationSymbols, shouldSolvePenetrationHook);
+  shouldSolvePenetrationDetour.Init(serverLoader, shouldSolvePenetrationSymbols, shouldSolvePenetrationHook);
   //shouldFreezeObjectDetour.Init(serverLoader, shouldFreezeObjectSymbols, shouldFreezeObjectHook);
   //updateEntityPenetrationFlagDetour.Init(serverLoader, updateEntityPenetrationFlagSymbols, updateEntityPenetrationFlagHook);
+  postCollisionDetour.Init(serverLoader, postCollisionSymbols, postCollisionHook);
   interPenetrationDetour.Init("bin/vphysics_srv.so", interPenetrationSymbols, interPenetrationHook);  
-return true;
+  registerLuaFunctions(propitate.GetLua());
+  return true;
 }
 
 void vphysShutdown() {
@@ -360,8 +469,10 @@ void vphysShutdown() {
   //objectWakeDetour.Shutdown();
   //objectSleepDetour.Shutdown();
   physFrameDetour.Shutdown();
-  //shouldSolvePenetrationDetour.Shutdown();
+  shouldSolvePenetrationDetour.Shutdown();
   //shouldFreezeObjectDetour.Shutdown();
   //updateEntityPenetrationFlagDetour.Shutdown();
+  postCollisionDetour.Shutdown();
   interPenetrationDetour.Shutdown();
+  unRegisterLuaFunctions(propitate.GetLua());
 }

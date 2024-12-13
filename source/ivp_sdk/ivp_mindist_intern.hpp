@@ -123,8 +123,8 @@ class IVP_Synapse_OO: public IVP_Listener_Hull {
     friend class IVP_OO_Watcher;
     IVP_Real_Object *object;
     IVP_OO_Watcher *watcher;
-    virtual ~IVP_Synapse_OO();
-    IVP_Synapse_OO(){};
+    virtual ~IVP_Synapse_OO() = default;
+    IVP_Synapse_OO(){}
     void initSynapseOO(IVP_OO_Watcher *, IVP_Real_Object *);
   
   public:
@@ -149,7 +149,7 @@ class IVP_OO_Watcher : public IVP_Collision, public IVP_Collision_Delegator {
     
     void hullLimitExceededEvent();
     void hullManagerIsHoingToBeDeletedEvent ();
-    virtual ~IVP_OO_Watcher();	    
+    virtual ~IVP_OO_Watcher() = default;
     IVP_OO_Watcher(IVP_Collision_Delegator *del, IVP_Real_Object *obj0, IVP_Real_Object *obj1);
     
     void simulateTimeEvent(IVP_Environment *) override { raise(SIGINT); }
