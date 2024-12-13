@@ -89,3 +89,5 @@ class Propitate {
       return physicsInterfaces;
     }
 };
+
+auto propitate = Propitate();
